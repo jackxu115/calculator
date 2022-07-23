@@ -1,0 +1,36 @@
+body {
+  background: #fdf5df;
+}
+
+.container {
+  background: #000000;
+  width: 360px;
+  height: 540px;
+  margin: 100px auto;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  justify-content: space-around;
+  align-items: center;
+  &_display {
+    width: 300px;
+    height: 120px;
+    background: #abf62d;
+    margin: 20px;
+    border-radius: 5px;
+  }
+  &_buttonArea {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 20px;
+    justify-content: space-between;
+    &_buttonList {
+      &_buttonItem {
+        height: 40px;
+        width: 60px;
+        background: #eba63f;
+      }
+    }
+  }
+}
