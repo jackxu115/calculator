@@ -1,8 +1,9 @@
-const displayBtn = document.querySelectorAll(".displayBtn")
+const displayBtn = document.querySelectorAll('.displayBtn')
 const inputValue = document.querySelector('.container_display_input_value')
 const equalBtn = document.querySelector('#btnEqual')
 const outputValue = document.querySelector('.container_display_output_value')
-
+const deleteBtn = document.querySelector('#btnDel')
+const clearBtn = document.querySelector('#btnAC')
 let input = []
 
 const htmlEntities = {
@@ -22,15 +23,14 @@ const createEntityArray = () => {
 }
 
 
-const getInput = () => {
-    displayBtn.forEach(button => {
-        button.addEventListener('click', () => {
-            if ( input.length === 0 ) inputValue.textContent = ""
-            createOperationArray(button.textContent)
-            displayInput(button.textContent)
-        })
+displayBtn.forEach(button => {
+    button.addEventListener('click', () => {
+        if (input.length === 0) inputValue.textContent = ""
+        createOperationArray(button.textContent)
+        displayInput(button.textContent)
     })
-}
+})
+
 
 const displayInput = (input) => {
     let txt = document.createElement('textarea')
@@ -63,13 +63,15 @@ const createOperationArray = (value) => {
     input.push(inputValue)
 }
 
-equalBtn.addEventListener('click', ()=> {
-    const answer = calculate()
-    while (input.length > 0) {
-        input.pop()
+equalBtn.addEventListener('click', () => {
+    if (input.length !== 0) {
+        const answer = calculate()
+        while (input.length > 0) {
+            input.pop()
+        }
+        console.log(answer)
+        outputValue.textContent = answer
     }
-    console.log(answer)
-    outputValue.textContent = answer
 })
 
 const calculate = () => {
@@ -78,15 +80,29 @@ const calculate = () => {
     try {
         answer = eval(operationString)
     } catch (e) {
-       if (e instanceof SyntaxError) {
-           answer = 'SyntaxError'
-       }
+        if (e instanceof SyntaxError) {
+            answer = 'SyntaxError'
+        }
     }
     return answer
 }
 
+deleteBtn.addEventListener('click', () => {
+    if (input.length !== 0) {
+        input.pop()
+        let inputArray = inputValue.textContent.split("")
+        inputArray.pop()
+        console.log(inputArray)
+        inputValue.textContent = inputArray.join("")
+    }
+})
 
-
+clearBtn.addEventListener('click', () => {
+    while (input.length > 0) {
+        input.pop()
+    }
+    outputValue.textContent = '0'
+    inputValue.textContent = ''
+})
 
 createEntityArray()
-getInput()
