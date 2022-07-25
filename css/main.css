@@ -82,4 +82,9 @@ body {
   grid-column-start: 4;
 }
 
+.footer {
+  margin: 0 auto;
+  width: 360px;
+}
+
 /*# sourceMappingURL=main.css.map */
